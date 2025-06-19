@@ -1,15 +1,91 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>HW5</title>
-		<style>
-			body { margin: 0; }
-		</style>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'></script>
-	</head>
-	<body>
-		<script src="src/hw5.js" type="module"></script>
+  <head>
+    <meta charset="utf-8" />
+    <title>HW5 - Interactive Basketball Court</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+      }
 
-	</body>
+      #ui-container {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        color: white;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        text-align: left;
+      }
+
+      #score-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+        min-width: 150px;
+      }
+
+      #controls-container {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 100;
+        color: white;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        text-align: left;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .control-item {
+        margin: 5px 0;
+      }
+
+      .key {
+        background-color: #444;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-weight: bold;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+    <div id="ui-container">
+      <h3>Basketball Court</h3>
+    </div>
+
+    <div id="score-container">
+      <div>Score: <span id="score">0</span></div>
+      <div>Baskets: <span id="baskets">0</span></div>
+    </div>
+
+    <div id="controls-container">
+      <h4>Controls:</h4>
+      <div class="control-item">
+        <span class="key">O</span> - Toggle orbit camera
+      </div>
+      <div class="control-item">
+        <span class="key">Mouse</span> - Orbit camera (when enabled)
+      </div>
+      <div class="control-item">
+        <span class="key">Scroll</span> - Zoom camera
+      </div>
+    </div>
+
+    <script src="src/hw5.js" type="module"></script>
+  </body>
 </html>
