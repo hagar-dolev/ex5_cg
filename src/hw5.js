@@ -42,106 +42,112 @@ function degrees_to_radians(degrees) {
 
 // Create basketball court
 function createBasketballCourt() {
-    const courtGeometry = new THREE.BoxGeometry(30, 0.2, 15);
-    const courtMaterial = new THREE.MeshPhongMaterial({
-        color: 0xc68642,
-        shininess: 50,
-    });
-    const court = new THREE.Mesh(courtGeometry, courtMaterial);
-    court.receiveShadow = true;
-    scene.add(court);
+  const courtGeometry = new THREE.BoxGeometry(30, 0.2, 15);
+  const courtMaterial = new THREE.MeshPhongMaterial({
+    color: 0xc68642,
+    shininess: 50,
+  });
+  const court = new THREE.Mesh(courtGeometry, courtMaterial);
+  court.receiveShadow = true;
+  scene.add(court);
 
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+  const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
 
-    // Center line
-    const centerLineGeometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0.11, -7.5),
-        new THREE.Vector3(0, 0.11, 7.5),
-    ]);
-    const centerLine = new THREE.Line(centerLineGeometry, lineMaterial);
-    scene.add(centerLine);
+  // Center line
+  const centerLineGeometry = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0.11, -7.5),
+    new THREE.Vector3(0, 0.11, 7.5),
+  ]);
+  const centerLine = new THREE.Line(centerLineGeometry, lineMaterial);
+  scene.add(centerLine);
 
-    // Center circle
-    const centerCirclePoints = [];
-    const centerCircleRadius = 1.8;
-    for (let i = 0; i <= 64; i++) {
-        const angle = (i / 64) * 2 * Math.PI;
-        centerCirclePoints.push(
-            new THREE.Vector3(
-                Math.cos(angle) * centerCircleRadius,
-                0.11,
-                Math.sin(angle) * centerCircleRadius
-            )
-        );
-    }
-    const centerCircleGeometry = new THREE.BufferGeometry().setFromPoints(centerCirclePoints);
-    const centerCircle = new THREE.Line(centerCircleGeometry, lineMaterial);
-    scene.add(centerCircle);
+  // Center circle
+  const centerCirclePoints = [];
+  const centerCircleRadius = 1.8;
+  for (let i = 0; i <= 64; i++) {
+    const angle = (i / 64) * 2 * Math.PI;
+    centerCirclePoints.push(
+      new THREE.Vector3(
+        Math.cos(angle) * centerCircleRadius,
+        0.11,
+        Math.sin(angle) * centerCircleRadius
+      )
+    );
+  }
+  const centerCircleGeometry = new THREE.BufferGeometry().setFromPoints(
+    centerCirclePoints
+  );
+  const centerCircle = new THREE.Line(centerCircleGeometry, lineMaterial);
+  scene.add(centerCircle);
 
-    // Three-point lines - arcs in front of each basket with extensions to court edges
-    const threePointRadius = 6.25;
-    
-    // Left three-point line (arc in front of left basket)
-    const leftThreePointPoints = [];
-    for (let i = 0; i <= 32; i++) {
-        const angle = -Math.PI/2 + (i / 32) * Math.PI; // Semi-circle facing right
-        leftThreePointPoints.push(
-            new THREE.Vector3(
-                -12 + Math.cos(angle) * threePointRadius,
-                0.11,
-                Math.sin(angle) * threePointRadius
-            )
-        );
-    }
-    const leftThreePointGeometry = new THREE.BufferGeometry().setFromPoints(leftThreePointPoints);
-    const leftThreePoint = new THREE.Line(leftThreePointGeometry, lineMaterial);
-    scene.add(leftThreePoint);
+  // Three-point lines - arcs in front of each basket with extensions to court edges
+  const threePointRadius = 6.25;
 
-    // Left three-point line extensions straight back to court edge behind basket
-    const leftTopExtension = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(-12, 0.11, threePointRadius),
-        new THREE.Vector3(-15, 0.11, threePointRadius) // straight back to court edge
-    ]);
-    const leftTopLine = new THREE.Line(leftTopExtension, lineMaterial);
-    scene.add(leftTopLine);
+  // Left three-point line (arc in front of left basket)
+  const leftThreePointPoints = [];
+  for (let i = 0; i <= 32; i++) {
+    const angle = -Math.PI / 2 + (i / 32) * Math.PI; // Semi-circle facing right
+    leftThreePointPoints.push(
+      new THREE.Vector3(
+        -12 + Math.cos(angle) * threePointRadius,
+        0.11,
+        Math.sin(angle) * threePointRadius
+      )
+    );
+  }
+  const leftThreePointGeometry = new THREE.BufferGeometry().setFromPoints(
+    leftThreePointPoints
+  );
+  const leftThreePoint = new THREE.Line(leftThreePointGeometry, lineMaterial);
+  scene.add(leftThreePoint);
 
-    const leftBottomExtension = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(-12, 0.11, -threePointRadius),
-        new THREE.Vector3(-15, 0.11, -threePointRadius) // straight back to court edge
-    ]);
-    const leftBottomLine = new THREE.Line(leftBottomExtension, lineMaterial);
-    scene.add(leftBottomLine);
+  // Left three-point line extensions straight back to court edge behind basket
+  const leftTopExtension = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-12, 0.11, threePointRadius),
+    new THREE.Vector3(-15, 0.11, threePointRadius), // straight back to court edge
+  ]);
+  const leftTopLine = new THREE.Line(leftTopExtension, lineMaterial);
+  scene.add(leftTopLine);
 
-    // Right three-point line (arc in front of right basket)
-    const rightThreePointPoints = [];
-    for (let i = 0; i <= 32; i++) {
-        const angle = Math.PI/2 + (i / 32) * Math.PI; // Semi-circle facing left
-        rightThreePointPoints.push(
-            new THREE.Vector3(
-                12 + Math.cos(angle) * threePointRadius,
-                0.11,
-                Math.sin(angle) * threePointRadius
-            )
-        );
-    }
-    const rightThreePointGeometry = new THREE.BufferGeometry().setFromPoints(rightThreePointPoints);
-    const rightThreePoint = new THREE.Line(rightThreePointGeometry, lineMaterial);
-    scene.add(rightThreePoint);
+  const leftBottomExtension = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-12, 0.11, -threePointRadius),
+    new THREE.Vector3(-15, 0.11, -threePointRadius), // straight back to court edge
+  ]);
+  const leftBottomLine = new THREE.Line(leftBottomExtension, lineMaterial);
+  scene.add(leftBottomLine);
 
-    // Right three-point line extensions straight back to court edge behind basket
-    const rightTopExtension = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(12, 0.11, threePointRadius),
-        new THREE.Vector3(15, 0.11, threePointRadius) // straight back to court edge
-    ]);
-    const rightTopLine = new THREE.Line(rightTopExtension, lineMaterial);
-    scene.add(rightTopLine);
+  // Right three-point line (arc in front of right basket)
+  const rightThreePointPoints = [];
+  for (let i = 0; i <= 32; i++) {
+    const angle = Math.PI / 2 + (i / 32) * Math.PI; // Semi-circle facing left
+    rightThreePointPoints.push(
+      new THREE.Vector3(
+        12 + Math.cos(angle) * threePointRadius,
+        0.11,
+        Math.sin(angle) * threePointRadius
+      )
+    );
+  }
+  const rightThreePointGeometry = new THREE.BufferGeometry().setFromPoints(
+    rightThreePointPoints
+  );
+  const rightThreePoint = new THREE.Line(rightThreePointGeometry, lineMaterial);
+  scene.add(rightThreePoint);
 
-    const rightBottomExtension = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(12, 0.11, -threePointRadius),
-        new THREE.Vector3(15, 0.11, -threePointRadius) // straight back to court edge
-    ]);
-    const rightBottomLine = new THREE.Line(rightBottomExtension, lineMaterial);
-    scene.add(rightBottomLine);
+  // Right three-point line extensions straight back to court edge behind basket
+  const rightTopExtension = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(12, 0.11, threePointRadius),
+    new THREE.Vector3(15, 0.11, threePointRadius), // straight back to court edge
+  ]);
+  const rightTopLine = new THREE.Line(rightTopExtension, lineMaterial);
+  scene.add(rightTopLine);
+
+  const rightBottomExtension = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(12, 0.11, -threePointRadius),
+    new THREE.Vector3(15, 0.11, -threePointRadius), // straight back to court edge
+  ]);
+  const rightBottomLine = new THREE.Line(rightBottomExtension, lineMaterial);
+  scene.add(rightBottomLine);
 }
 
 // Create basketball hoop with all components
@@ -151,6 +157,7 @@ function createBasketballHoop(x, z, facingDirection) {
   // Rim (orange circle)
   const rimRadius = 0.45;
   const rimGeometry = new THREE.TorusGeometry(rimRadius, 0.05, 8, 32);
+  rimGeometry.rotateX(Math.PI / 2);
   const rimMaterial = new THREE.MeshPhongMaterial({ color: 0xff8c00 }); // Orange
   const rim = new THREE.Mesh(rimGeometry, rimMaterial);
   rim.position.set(x, 10, z); // 10 feet height
@@ -159,7 +166,7 @@ function createBasketballHoop(x, z, facingDirection) {
   hoopGroup.add(rim);
 
   // Backboard (white, partially transparent)
-  const backboardGeometry = new THREE.BoxGeometry(1.8, 1.05, 0.1);
+  const backboardGeometry = new THREE.BoxGeometry(0.1, 1.05, 1.8);
   const backboardMaterial = new THREE.MeshPhongMaterial({
     color: 0xffffff,
     transparent: true,
@@ -172,7 +179,7 @@ function createBasketballHoop(x, z, facingDirection) {
   hoopGroup.add(backboard);
 
   // Support pole
-  const poleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 10, 8);
+  const poleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 11, 8);
   const poleMaterial = new THREE.MeshPhongMaterial({ color: 0x666666 }); // Gray
   const pole = new THREE.Mesh(poleGeometry, poleMaterial);
   pole.position.set(x + facingDirection * 1.5, 5, z); // Behind backboard
