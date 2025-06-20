@@ -56,35 +56,26 @@ function degrees_to_radians(degrees) {
 
 // Create enhanced basketball court with detailed markings
 function createBasketballCourt() {
-  // Create court texture
-  const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 512;
-  const ctx = canvas.getContext("2d");
+  const textureLoader = new THREE.TextureLoader();
+  const courtTexture = textureLoader.load(
+    "src/textures/ParquetFlooring06_MR_4K/ParquetFlooring06_4K_BaseColor.png"
+  );
+  const normalMap = textureLoader.load(
+    "src/textures/ParquetFlooring06_MR_4K/ParquetFlooring06_4K_Normal.png"
+  );
+  const roughnessMap = textureLoader.load(
+    "src/textures/ParquetFlooring06_MR_4K/ParquetFlooring06_4K_Roughness.png"
+  );
 
-  // Wooden court texture
-  ctx.fillStyle = "#c68642";
-  ctx.fillRect(0, 0, 1024, 512);
-
-  // Add wood grain effect
-  for (let i = 0; i < 20; i++) {
-    ctx.strokeStyle = `rgba(139, 69, 19, ${0.1 + Math.random() * 0.2})`;
-    ctx.lineWidth = 2 + Math.random() * 3;
-    ctx.beginPath();
-    ctx.moveTo(0, i * 25 + Math.random() * 10);
-    ctx.lineTo(1024, i * 25 + Math.random() * 10);
-    ctx.stroke();
-  }
-
-  const courtTexture = new THREE.CanvasTexture(canvas);
   courtTexture.wrapS = THREE.RepeatWrapping;
   courtTexture.wrapT = THREE.RepeatWrapping;
-  courtTexture.repeat.set(2, 1);
+  courtTexture.repeat.set(4, 4);
 
   const courtGeometry = new THREE.BoxGeometry(30, 0.2, 15);
-  const courtMaterial = new THREE.MeshPhongMaterial({
+  const courtMaterial = new THREE.MeshStandardMaterial({
     map: courtTexture,
-    shininess: 50,
+    normalMap: normalMap,
+    roughnessMap: roughnessMap,
   });
   const court = new THREE.Mesh(courtGeometry, courtMaterial);
   court.receiveShadow = true;
