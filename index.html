@@ -19,6 +19,9 @@
         font-size: 16px;
         font-family: Arial, sans-serif;
         text-align: left;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 15px;
+        border-radius: 10px;
       }
 
       #score-container {
@@ -35,21 +38,28 @@
         min-width: 150px;
       }
 
-      #controls-container {
+      #bonus-features {
         position: absolute;
-        bottom: 20px;
-        left: 20px;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 100;
         color: white;
         font-size: 14px;
         font-family: Arial, sans-serif;
-        text-align: left;
+        text-align: center;
         background-color: rgba(0, 0, 0, 0.7);
         padding: 15px;
         border-radius: 10px;
+        max-width: 400px;
       }
 
-      .control-item {
+      .feature-list {
+        text-align: left;
+        margin-top: 10px;
+      }
+
+      .feature-list li {
         margin: 5px 0;
       }
 
@@ -64,26 +74,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </head>
   <body>
-    <div id="ui-container">
+    <!-- <div id="style="color: white; position: absolute; z-index: 100;">Basketball Court</div> -->
+    <!-- <div id="ui-container">
       <h3>Basketball Court</h3>
-    </div>
+      <p>HW5 with Bonus Features</p>
+    </div> -->
 
     <div id="score-container">
       <div>Score: <span id="score">0</span></div>
       <div>Baskets: <span id="baskets">0</span></div>
-    </div>
-
-    <div id="controls-container">
-      <h4>Controls:</h4>
-      <div class="control-item">
-        <span class="key">O</span> - Toggle orbit camera
-      </div>
-      <div class="control-item">
-        <span class="key">Mouse</span> - Orbit camera (when enabled)
-      </div>
-      <div class="control-item">
-        <span class="key">Scroll</span> - Zoom camera
-      </div>
     </div>
 
     <script src="src/hw5.js" type="module"></script>
