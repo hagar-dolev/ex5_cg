@@ -316,10 +316,6 @@ instructionsElement.style.color = "white";
 instructionsElement.style.fontSize = "16px";
 instructionsElement.style.fontFamily = "Arial, sans-serif";
 instructionsElement.style.textAlign = "left";
-instructionsElement.innerHTML = `
-  <h3>Controls:</h3>
-  <p>O - Toggle orbit camera</p>
-`;
 document.body.appendChild(instructionsElement);
 
 // Handle key events
