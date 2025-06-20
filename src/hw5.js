@@ -398,46 +398,10 @@ function createBasketball() {
   const ballGeometry = new THREE.SphereGeometry(ballRadius, 32, 32);
 
   // Create enhanced basketball texture
-  const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
-  const ctx = canvas.getContext("2d");
+  const texture = new THREE.TextureLoader().load(
+    "src/textures/balldimpled.png"
+  );
 
-  // Orange background with gradient
-  const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
-  gradient.addColorStop(0, "#ff8c00");
-  gradient.addColorStop(1, "#e67e00");
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 512, 512);
-
-  // Black seams with better design
-  ctx.strokeStyle = "#000000";
-  ctx.lineWidth = 12;
-  ctx.lineCap = "round";
-
-  // Horizontal seam
-  ctx.beginPath();
-  ctx.moveTo(0, 256);
-  ctx.lineTo(512, 256);
-  ctx.stroke();
-
-  // Vertical seam
-  ctx.beginPath();
-  ctx.moveTo(256, 0);
-  ctx.lineTo(256, 512);
-  ctx.stroke();
-
-  // Curved seams
-  ctx.beginPath();
-  ctx.arc(256, 256, 180, 0, 2 * Math.PI);
-  ctx.stroke();
-
-  // Additional curved seams for more realistic look
-  ctx.beginPath();
-  ctx.arc(256, 256, 120, 0, 2 * Math.PI);
-  ctx.stroke();
-
-  const texture = new THREE.CanvasTexture(canvas);
   const ballMaterial = new THREE.MeshPhongMaterial({
     map: texture,
     shininess: 30,
